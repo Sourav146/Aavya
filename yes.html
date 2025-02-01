@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Aavya</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #2c3e50; /* Dark blue background */
+      font-family: 'Georgia', serif;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .flip-card {
+      width: 300px;
+      height: 400px;
+      perspective: 1000px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .flip-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(231, 76, 60, 0.8); /* Glow effect on hover */
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.open .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px; /* Rounded corners for the card */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .flip-card-front {
+      background-color: #e74c3c; /* Red background for the front */
+    }
+
+    .flip-card-back {
+      background-color: #d2b48c; /* Dark beige background for the back */
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px; /* Match the card's rounded corners */
+    }
+
+    .flip-card-back p {
+      margin: 10px 0;
+      font-size: 16px;
+      line-height: 1.5;
+      text-align: center;
+      color: #2c3e50; /* Dark blue text */
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    .flip-card-back p:first-child {
+      font-size: 20px;
+      font-weight: bold;
+      animation-delay: 0.5s;
+    }
+
+    .flip-card-back p:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .flip-card-back p:nth-child(3) {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Beating <3 symbol */
+    .heart-symbol {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 60px;
+      color: white;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    /* Beating ❤️ emoji */
+    .heart-emoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 60px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    .polaroid-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .polaroid {
+      position: absolute;
+      width: 120px;
+      height: 150px;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for 3D effect */
+      transform: rotate(calc(-10deg + 20deg * var(--i)));
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, left 0.5s ease-in-out, top 0.5s ease-in-out;
+      pointer-events: auto; /* Allow polaroids to be interactive */
+      touch-action: none; /* Disable default touch behaviors */
+      border-radius: 10px; /* Rounded corners for polaroids */
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      border-radius: 8px; /* Slightly rounded corners for the image */
+    }
+
+    .polaroid p {
+      margin: 5px 0 0;
+      font-size: 12px;
+      text-align: center;
+      font-style: italic;
+      color: #333;
+    }
+
+    .flip-card.open .polaroid {
+      opacity: 1;
+      transform: rotate(calc(-10deg + 20deg * var(--i))) translate(calc(-50% + 100px * var(--x)), calc(-50% + 100px * var(--y)));
+    }
+
+    .flip-card:not(.open) .polaroid {
+      opacity: 0;
+      transform: rotate(calc(-10deg + 20deg * var(--i))) translate(0, 0);
+    }
+  </style>
+</head>
+<body>
+  <div class="flip-card" onclick="flipCard()">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <!-- Choose one of the following: -->
+        <!-- Beating <3 symbol -->
+        <div class="heart-symbol">&lt;3</div>
+
+        <!-- Beating ❤️ emoji -->
+        <!-- <div class="heart-emoji">❤️</div> -->
+      </div>
+      <div class="flip-card-back">
+        <p>Dear Aavya,</p>
+        <p>You mean the world to me. Every moment with you is a treasure, and I am so grateful to have you in my life. I love you more than words can express.</p>
+        <p>Forever Yours</p>
+      </div>
+    </div>
+    <div class="polaroid-container">
+      <div class="polaroid" style="--i: 0; --x: 0.5; --y: 0.2;">
+        <img src="photo1.jpg" alt="Memory 1">
+        <p>Our First Date ❤️</p>
+      </div>
+      <div class="polaroid" style="--i: 1; --x: -0.3; --y: 0.4;">
+        <img src="photo2.jpg" alt="Memory 2">
+        <p>Forever Smiles 😊</p>
+      </div>
+      <div class="polaroid" style="--i: 2; --x: 0.2; --y: -0.3;">
+        <img src="photo3.jpg" alt="Memory 3">
+        <p>Adventures Together 🌟</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Flip card functionality
+    function flipCard() {
+      const flipCard = document.querySelector('.flip-card');
+      flipCard.classList.toggle('open');
+
+      // Reset polaroid positions and transitions when card is flipped back
+      if (!flipCard.classList.contains('open')) {
+        const polaroids = document.querySelectorAll('.polaroid');
+        polaroids.forEach(polaroid => {
+          polaroid.style.transition = 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out, left 0.5s ease-in-out, top 0.5s ease-in-out';
+          polaroid.style.left = '';
+          polaroid.style.top = '';
+          polaroid.style.transform = `rotate(calc(-10deg + 20deg * ${polaroid.style.getPropertyValue('--i')}))`;
+        });
+      } else {
+        // Ensure transitions are enabled when card is flipped open
+        const polaroids = document.querySelectorAll('.polaroid');
+        polaroids.forEach(polaroid => {
+          polaroid.style.transition = 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out, left 0.5s ease-in-out, top 0.5s ease-in-out';
+        });
+      }
+    }
+
+    // Drag-and-drop functionality for polaroids (supports both mouse and touch)
+    const polaroids = document.querySelectorAll('.polaroid');
+
+    polaroids.forEach(polaroid => {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      // Mouse events
+      polaroid.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - polaroid.getBoundingClientRect().left;
+        offsetY = e.clientY - polaroid.getBoundingClientRect().top;
+        polaroid.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          polaroid.style.left = `${e.clientX - offsetX}px`;
+          polaroid.style.top = `${e.clientY - offsetY}px`;
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        polaroid.style.cursor = 'grab';
+      });
+
+      // Touch events
+      polaroid.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        const touch = e.touches[0];
+        offsetX = touch.clientX - polaroid.getBoundingClientRect().left;
+        offsetY = touch.clientY - polaroid.getBoundingClientRect().top;
+      });
+
+      document.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+          const touch = e.touches[0];
+          polaroid.style.left = `${touch.clientX - offsetX}px`;
+          polaroid.style.top = `${touch.clientY - offsetY}px`;
+        }
+      });
+
+      document.addEventListener('touchend', () => {
+        isDragging = false;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <!-- Google Font for Vagabond Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Vagabond&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0; /* Fallback solid background */
+            background-image: url('A.jpg'); /* Local image file */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Main Content */
+        .container {
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Vagabond', sans-serif; /* Apply Vagabond font */
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: 'Vagabond', sans-serif; /* Apply Vagabond font */
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+
+        .button.no {
+            background-color: #dc3545;
+        }
+
+        .button.no:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Hi Aavya!</h1>
+        <p>Would you like to continue?</p>
+        <div class="button-container">
+            <a href="yes.html" class="button yes">Yes</a>
+            <a href="#" class="button no" id="noButton">No</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to randomly position the "No" button
+        function moveNoButton() {
+            const button = document.getElementById('noButton');
+            const maxX = window.innerWidth - button.offsetWidth - 30; // Ensure button stays within screen bounds
+            const maxY = window.innerHeight - button.offsetHeight - 30;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            button.style.position = 'absolute';
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+        }
+
+        // Attach event listeners for click and touch events on the "No" button
+        const noButton = document.getElementById('noButton');
+
+        noButton.addEventListener('click', moveNoButton);
+        noButton.addEventListener('touchstart', moveNoButton);
+    </script>
+</body>
+</html>
